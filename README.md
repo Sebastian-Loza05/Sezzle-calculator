@@ -1,7 +1,7 @@
 # Sezzle Calculator
 
-A full-stack calculator project. The Go backend is implemented; the
-React frontend is the next part of the project.
+A full-stack calculator project with a Go backend and React, TypeScript, Vite,
+and Tailwind CSS frontend.
 
 ## Run the backend
 
@@ -18,6 +18,21 @@ The server listens on port `8080` by default. Set `PORT` to use another port:
 ```sh
 PORT=8081 go run ./cmd/server
 ```
+
+## Run the frontend
+
+In a second terminal, from the repository root:
+
+```sh
+cd frontend
+npm install
+npm run dev
+```
+
+Open the local URL printed by Vite. The development server proxies `/calculate`
+to the backend on port `8080`. Run `npm test`, `npm run lint`, and
+`npm run build` from `frontend/` to verify the frontend. If you use a different
+backend port, update the proxy target in `frontend/vite.config.ts`.
 
 ## API
 

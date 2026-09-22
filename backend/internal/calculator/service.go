@@ -7,7 +7,7 @@ import (
 
 var (
 	ErrInvalidOperation               = errors.New("invalid operation")
-	ErrDivisionByZero                 = errors.New("division by zero")
+	ErrDivisionByZero                 = errors.New("cannot divide by zero")
 	ErrNonFiniteOperand               = errors.New("operands must be finite numbers")
 	ErrNonFiniteResult                = errors.New("result is outside the supported range")
 	ErrNegativeSquareRoot             = errors.New("cannot take the square root of a negative number")
