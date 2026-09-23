@@ -176,3 +176,14 @@ Lets apply only this reviews:
 
 9.
 Now for the dockerfile for full-stack deployment I think the best option is to have a dockerfile for the backend and one for the frontend and build everything with a docker compose, let me know your thoughts about this and your considerations
+
+# Final validation:
+10. 
+
+Check if all the requirments of the project are met, specially focused con the tests and coverage, and explain me if you find something missing.
+
+11.
+I know we are not making 100% coverage because of the main files that are just wirng and we don't need to test them with unit tests, but explain me why we are not considering the other extra tests.
+
+12.
+Some of those tests are important so add those tests for the malformed JSON in the backend and malformed success response or an error response without the expected message for the frontend.

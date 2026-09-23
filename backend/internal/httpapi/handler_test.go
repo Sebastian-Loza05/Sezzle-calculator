@@ -34,6 +34,7 @@ func TestCalculateRoute(t *testing.T) {
 		{name: "invalid operation", method: http.MethodPost, contentType: "application/json", body: `{"operation":"square","a":2,"b":3}`, wantStatus: http.StatusBadRequest, wantCode: "invalid_operation"},
 		{name: "unknown field", method: http.MethodPost, contentType: "application/json", body: `{"operation":"add","a":2,"b":3,"extra":1}`, wantStatus: http.StatusBadRequest, wantCode: "invalid_request"},
 		{name: "trailing JSON", method: http.MethodPost, contentType: "application/json", body: `{"operation":"add","a":2,"b":3} {}`, wantStatus: http.StatusBadRequest, wantCode: "invalid_request"},
+		{name: "malformed trailing JSON", method: http.MethodPost, contentType: "application/json", body: `{"operation":"add","a":2,"b":3} {`, wantStatus: http.StatusBadRequest, wantCode: "invalid_request"},
 		{name: "wrong operand type", method: http.MethodPost, contentType: "application/json", body: `{"operation":"add","a":"2","b":3}`, wantStatus: http.StatusBadRequest, wantCode: "invalid_request"},
 		{name: "wrong content type", method: http.MethodPost, contentType: "text/plain", body: `{"operation":"add","a":2,"b":3}`, wantStatus: http.StatusUnsupportedMediaType, wantCode: "unsupported_media_type"},
 		{name: "wrong method", method: http.MethodGet, wantStatus: http.StatusMethodNotAllowed, wantCode: "method_not_allowed"},

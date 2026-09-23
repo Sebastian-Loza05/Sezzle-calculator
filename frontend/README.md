@@ -19,9 +19,12 @@ target in `vite.config.ts`.
 
 ```sh
 npm test
+npm run coverage
 npm run lint
 npm run build
 ```
+
+The coverage command writes a detailed HTML report to `coverage/index.html`.
 
 The UI validates required finite operands. It always displays the second
 operand; for square root, the field is disabled and its value is omitted from

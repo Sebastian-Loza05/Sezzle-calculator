@@ -23,11 +23,35 @@ describe('calculate', () => {
 
   it('shows the backend error message', async () => {
     vi.stubGlobal('fetch', vi.fn(async () => Response.json(
-      { error: { code: 'division_by_zero', message: 'division by zero' } },
+      { error: { code: 'division_by_zero', message: 'cannot divide by zero' } },
       { status: 400 },
     )))
 
-    await expect(calculate({ operation: 'divide', a: 1, b: 0 })).rejects.toThrow('division by zero')
+    await expect(calculate({ operation: 'divide', a: 1, b: 0 })).rejects.toThrow('cannot divide by zero')
+  })
+
+  it('rejects a success response with the wrong result type', async () => {
+    vi.stubGlobal('fetch', vi.fn(async () => Response.json({ result: '3' })))
+
+    await expect(calculate({ operation: 'add', a: 1, b: 2 })).rejects.toThrow('The calculator returned an unexpected response.')
+  })
+
+  it('rejects a success response containing invalid JSON', async () => {
+    vi.stubGlobal('fetch', vi.fn(async () => new Response('{', {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    })))
+
+    await expect(calculate({ operation: 'add', a: 1, b: 2 })).rejects.toThrow('The calculator returned an unexpected response.')
+  })
+
+  it('uses a fallback when an error response has no message', async () => {
+    vi.stubGlobal('fetch', vi.fn(async () => Response.json(
+      { error: { code: 'division_by_zero' } },
+      { status: 400 },
+    )))
+
+    await expect(calculate({ operation: 'divide', a: 1, b: 0 })).rejects.toThrow('Calculation failed. Please try again.')
   })
 
   it('explains a network failure', async () => {

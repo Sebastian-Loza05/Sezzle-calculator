@@ -56,13 +56,13 @@ describe('Calculator UI', () => {
 
   it('displays an error returned by the backend', async () => {
     vi.stubGlobal('fetch', vi.fn(async () => Response.json(
-      { error: { code: 'division_by_zero', message: 'division by zero' } },
+      { error: { code: 'division_by_zero', message: 'cannot divide by zero' } },
       { status: 400 },
     )))
 
     await submitForm()
 
-    expect(container.querySelector('[role="alert"]')?.textContent).toBe('division by zero')
+    expect(container.querySelector('[role="alert"]')?.textContent).toBe('cannot divide by zero')
     expect(container.querySelector('output')?.textContent).toBe('—')
   })
 
