@@ -3,6 +3,18 @@
 A full-stack calculator project with a Go backend and React, TypeScript, Vite,
 and Tailwind CSS frontend.
 
+## Run the full stack with Docker
+
+From the repository root:
+
+```sh
+docker compose up --build
+```
+
+Open `http://localhost:3000`. The frontend container serves the built React app
+with Nginx and forwards `/calculate` to the Go container. The backend is only
+reachable on the Compose network. Stop both services with `docker compose down`.
+
 ## Run the backend
 
 The backend currently uses the Go version declared in [backend/go.mod](backend/go.mod).
@@ -36,7 +48,8 @@ backend port, update the proxy target in `frontend/vite.config.ts`.
 
 ## API
 
-Send a JSON POST request to `/calculate`:
+Send a JSON POST request to `/calculate`. These examples use the backend run
+directly on port `8080`; with Docker Compose, use `localhost:3000` instead:
 
 ```sh
 curl -i -X POST http://localhost:8080/calculate \

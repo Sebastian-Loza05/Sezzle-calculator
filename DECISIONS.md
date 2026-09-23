@@ -23,3 +23,4 @@
 | Abort calculations after 15 seconds. | A stalled request cannot leave the form disabled indefinitely. |
 | Test validation and API behavior with Vitest. | Focused tests cover zero, required operands, request shape, backend and network errors, and timeouts. |
 | Test the rendered UI with Vitest and jsdom. | These tests verify that square root disables the second field and that validation and backend errors appear to users. |
+| Build separate Go and frontend images with Compose; serve the frontend and proxy `/calculate` through Nginx. | Each image has one job, and the browser can call the API on the same origin without changing the Go service. |

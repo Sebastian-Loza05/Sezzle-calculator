@@ -170,3 +170,9 @@ Review specifically:
 Lets apply only this reviews:
   - AbortController to control the time we wait for the fecth.
   - Tests that validate the UI behaviour of the square root and the display of the errors
+
+
+# Dockerfile Deployment:
+
+9.
+Now for the dockerfile for full-stack deployment I think the best option is to have a dockerfile for the backend and one for the frontend and build everything with a docker compose, let me know your thoughts about this and your considerations
