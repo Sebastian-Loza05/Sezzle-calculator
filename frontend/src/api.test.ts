@@ -1,7 +1,10 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { calculate } from './api'
 
-afterEach(() => vi.unstubAllGlobals())
+afterEach(() => {
+  vi.useRealTimers()
+  vi.unstubAllGlobals()
+})
 
 describe('calculate', () => {
   it('posts the exact square-root request and returns the result', async () => {
@@ -31,5 +34,16 @@ describe('calculate', () => {
     vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('offline')))
 
     await expect(calculate({ operation: 'add', a: 1, b: 2 })).rejects.toThrow('Check that the backend is running')
+  })
+
+  it('aborts a request that takes too long', async () => {
+    vi.useFakeTimers()
+    vi.stubGlobal('fetch', vi.fn((_url: string, init: RequestInit) => new Promise<Response>((_resolve, reject) => {
+      init.signal?.addEventListener('abort', () => reject(new DOMException('Aborted', 'AbortError')))
+    })))
+
+    const assertion = expect(calculate({ operation: 'add', a: 1, b: 2 })).rejects.toThrow('timed out')
+    await vi.advanceTimersByTimeAsync(15_000)
+    await assertion
   })
 })

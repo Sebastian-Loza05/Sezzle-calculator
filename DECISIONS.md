@@ -15,3 +15,11 @@
 | Use `float64` and reject non-finite operands or results. | It suits a general calculator and keeps every successful result valid JSON; exact decimal arithmetic is outside this scope. |
 | Validate JSON strictly and return stable error codes. | Missing fields, typos, extra data, and mathematical errors should give predictable feedback to the frontend. |
 | Use table-driven unit tests and `httptest`. | They cover arithmetic and HTTP behavior without starting a network server. |
+| Build the frontend with React, TypeScript, Vite, and Tailwind CSS. | The existing Vite setup is small, TypeScript catches mistakes, and Tailwind supports fast responsive styling. |
+| Keep the single-screen UI in `App.tsx` with local state; separate validation and HTTP calls into `calculator.ts` and `api.ts`. | The component stays simple while request rules and network behavior can be tested independently. |
+| Keep the second operand visible but disabled for square root, and omit `b` from its request. | The layout stays consistent and the payload matches the backend contract. |
+| Validate required finite operands in the UI and show backend error messages. | Users get immediate input feedback while the backend remains responsible for mathematical rules. |
+| Proxy `/calculate` to Go during Vite development. | Relative requests work without changing the backend's CORS behavior. |
+| Abort calculations after 15 seconds. | A stalled request cannot leave the form disabled indefinitely. |
+| Test validation and API behavior with Vitest. | Focused tests cover zero, required operands, request shape, backend and network errors, and timeouts. |
+| Test the rendered UI with Vitest and jsdom. | These tests verify that square root disables the second field and that validation and backend errors appear to users. |

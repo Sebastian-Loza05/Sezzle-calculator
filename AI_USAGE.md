@@ -149,3 +149,24 @@ Ok, the design is good as it is simple. But I will prefer to use tailwindcss as 
   └──────────────────────────────┘
   For the second operand, show it always, but if the user selects sqrt operation disable that field.
 
+7.
+Be a senior React engineer and review the implementation of the frontend for a Junior implementation that has to be simple but robust for every possible case (even failures). Do not modify any file, just explain me if you find anything you think it has to be changed.
+Review specifically:
+
+  1. Correctness
+  2. TypeScript type safety
+  3. React best practices
+  4. State management
+  5. Separation of concerns
+  6. API error handling
+  7. Input validation
+  8. Accessibility
+  9. Responsive behavior
+  10. Unnecessary abstractions or dependencies
+  11. Edge cases
+
+
+8.
+Lets apply only this reviews:
+  - AbortController to control the time we wait for the fecth.
+  - Tests that validate the UI behaviour of the square root and the display of the errors
